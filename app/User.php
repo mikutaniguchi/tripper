@@ -26,4 +26,112 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    
+    public function posts()
+    {
+        return $this->hasMany(post::class);
+    }
+    
+      public function followings()
+    {
+        return $this->belongsToMany(User::class, 'user_follow', 'user_id', 'follow_id')->withTimestamps();
+    }
+
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'user_follow', 'follow_id', 'user_id')->withTimestamps();
+    }
+    
+    public function follow($userId)
+    {
+        // 既にフォローしているかの確認
+        $exist = $this->is_following($userId);
+        // 相手が自分自身ではないかの確認
+        $its_me = $this->id == $userId;
+    
+        if ($exist || $its_me) {
+            // 既にフォローしていれば何もしない
+            return false;
+        } else {
+            // 未フォローであればフォローする
+            $this->followings()->attach($userId);
+            return true;
+        }
+    }
+    
+    public function unfollow($userId)
+    {
+        // 既にフォローしているかの確認
+        $exist = $this->is_following($userId);
+        // 相手が自分自身ではないかの確認
+        $its_me = $this->id == $userId;
+    
+        if ($exist && !$its_me) {
+            // 既にフォローしていればフォローを外す
+            $this->followings()->detach($userId);
+            return true;
+        } else {
+            // 未フォローであれば何もしない
+            return false;
+        }
+    }
+    
+    public function is_following($userId)
+    {
+        return $this->followings()->where('follow_id', $userId)->exists();
+    }
+    
+    public function feed_posts()
+    {
+        $follow_user_ids = $this->followings()->pluck('users.id')->toArray();
+        $follow_user_ids[] = $this->id;
+        return Post::whereIn('user_id', $follow_user_ids);
+    }
+    
+     public function likes()
+    {
+        
+        // modelクラスがpostで中間テーブルがlikes、こっち側はuser_id,関係先がpost_id
+         return $this->belongsToMany(post::class, 'likes', 'user_id', 'post_id')->withTimestamps();
+    }
+    
+     public function is_like($postId)
+    {
+        return $this->likes()->where('post_id', $postId)->exists();
+    }
+    
+    public function like($postId)
+    {
+        // 既にlikeしているかの確認
+        $exist = $this->is_like($postId);
+        // 相手が自分自身ではないかの確認
+     
+    
+        if ($exist) {
+            // 既にお気に入りに入れていれば何もしない
+            return false;
+        } else {
+            // 未登録であればお気に入り追加する
+            $this->likes()->attach($postId);
+            return true;
+        }
+    }
+    
+    public function unlike($postId)
+    {
+        // 既にお気に入りにしているかの確認
+        $exist = $this->is_like($postId);
+        // 相手が自分自身ではないかの確認
+       
+    
+        if ($exist) {
+            // 既にお気に入りにしていればフォローを外す
+            $this->likes()->detach($postId);
+            return true;
+        } else {
+            // 未登録であれば何もしない
+            return false;
+        }
+    }
+    
 }

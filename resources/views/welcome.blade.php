@@ -1,49 +1,37 @@
 @extends('layouts.app')
 
 @section('content')
-    @if (Auth::check())
-        {{ Auth::user()->name }}
+   @if (Auth::check())
+        <div class="row">
+            <aside class="col-sm-4">
+                @include('users.card', ['user' => Auth::user()])
+            </aside>
+            <div class="col-sm-8">
+                @if (Auth::id() == $user->id)
+                    {!! Form::open(['route' => 'posts.store']) !!}
+                        <div class="form-group">
+                            
+                            <!--photo-->
+                            <!--month-->
+                            <!--prefecture-->
+                            <!--category-->
+                            
+                            {!! Form::textarea('content', old('content'), ['class' => 'form-control', 'rows' => '2']) !!}
+                            {!! Form::submit('投稿', ['class' => 'btn btn-primary btn-block']) !!}
+                        </div>
+                    {!! Form::close() !!}
+                @endif
+                @if (count($posts) > 0)
+                    @include('posts.posts', ['posts' => $posts])
+                @endif
+            </div>
+        </div>
     @else
-        <div class="center jumbotron">
+      <div class="center jumbotron">
             <div class="text-center">
-            <h1>旅の感動を共有しよう</h1>
+                <h1>旅の感動を共有しよう</h1>
+                {!! link_to_route('signup.get', '新規登録', [], ['class' => 'btn btn-lg btn-primary']) !!}
+            </div>
         </div>
-        
-　 <div class="border">
-    <div class="text-center">
-        <h2>新規登録</h2>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-6 offset-sm-3">
-
-            {!! Form::open(['route' => 'signup.post']) !!}
-                <div class="form-group">
-                    {!! Form::label('name', 'Name') !!}
-                    {!! Form::text('name', old('name'), ['class' => 'form-control']) !!}
-                </div>
-
-                <div class="form-group">
-                    {!! Form::label('email', 'Email') !!}
-                    {!! Form::email('email', old('email'), ['class' => 'form-control']) !!}
-                </div>
-
-                <div class="form-group">
-                    {!! Form::label('password', 'Password') !!}
-                    {!! Form::password('password', ['class' => 'form-control']) !!}
-                </div>
-
-                <div class="form-group">
-                    {!! Form::label('password_confirmation', 'Confirmation') !!}
-                    {!! Form::password('password_confirmation', ['class' => 'form-control']) !!}
-                </div>
-
-                {!! Form::submit('Sign up', ['class' => 'btn btn-primary btn-block']) !!}
-            {!! Form::close() !!}
-        </div>
-    </div>
-    </div>
-    
-    </div>
     @endif
 @endsection
