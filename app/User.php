@@ -29,7 +29,7 @@ class User extends Authenticatable
     
     public function posts()
     {
-        return $this->hasMany(post::class);
+        return $this->hasMany(Post::class);
     }
     
       public function followings()
@@ -92,7 +92,7 @@ class User extends Authenticatable
     {
         
         // modelクラスがpostで中間テーブルがlikes、こっち側はuser_id,関係先がpost_id
-         return $this->belongsToMany(post::class, 'likes', 'user_id', 'post_id')->withTimestamps();
+         return $this->belongsToMany(Post::class, 'likes', 'user_id', 'post_id')->withTimestamps();
     }
     
      public function is_like($postId)

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\User; 
+use App\Post;
+
 class UsersController extends Controller
 {
     public function index()
@@ -78,6 +81,6 @@ class UsersController extends Controller
         
         $data += $this->counts($user);
 
-        return view('users.likes', $data);
+        return back($data);
     }
 }

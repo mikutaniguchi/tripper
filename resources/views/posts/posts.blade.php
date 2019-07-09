@@ -7,8 +7,18 @@
                     {!! link_to_route('users.show', $post->user->name, ['id' => $post->user->id]) !!} <span class="text-muted">posted at {{ $post->created_at }}</span>
                 </div>
                 <div>
-                    <p class="mb-0">{!! nl2br(e($post->content)) !!}</p>
+                    <p>
+                        <img src="{{$post->file}}" class="mb-2 post_image">
+                    </p>
+                <div class="d-flex">
+                    <p class="mb-0 mr-3">{!! nl2br(e($post->month)) !!}</p>
+                    <p class="mb-0 mr-3">{!! nl2br(e($post->prefecture)) !!}</p>
+                    <p class="mb-0 mr-3">{!! nl2br(e($post->category)) !!}</p>
                 </div>
+                    <p class="mb-2">{!! nl2br(e($post->content)) !!}</p>
+                </div>
+                <div> {{ $count_likes }} @include('likes.likes_button', ['user' => $user])</div>
+                 
                  <div>
                     @if (Auth::id() == $post->user_id)
                         {!! Form::open(['route' => ['posts.destroy', $post->id], 'method' => 'delete']) !!}
