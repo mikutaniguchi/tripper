@@ -1,9 +1,9 @@
    @if (Auth::user()->is_like($post->id))
         {!! Form::open(['route' => ['likes.unlike', $post->id], 'method' => 'delete']) !!}
-            {!! Form::submit('行きたい！', ['class' => "btn-warning"]) !!}
+            {!! Form::button('<i class="fas fa-heart"></i>', ['class' => "btn_remove text-danger p-0", 'type' => 'submit']) !!}
         {!! Form::close() !!}
     @else
         {!! Form::open(['route' => ['likes.like', $post->id]]) !!}
-            {!! Form::submit('行きたい！', ['class' => "btn-outline-secondary"]) !!}
+            {!! Form::button('<i class="far fa-heart"></i>', ['class' => "btn_remove text-danger p-0", 'type' => 'submit']) !!}
         {!! Form::close() !!}
     @endif

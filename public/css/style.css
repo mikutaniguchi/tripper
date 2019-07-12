@@ -1,3 +1,38 @@
 .post_image{
     width:100%;
 }
+
+
+.btn_remove{
+    font-size: 20px;
+    padding: 0;
+    outline: none;
+    border: none;
+    background: none;
+}
+
+.btn1{
+  display: block;
+  margin: 0 0 0 auto;
+}
+
+
+
+ h1{
+letter-spacing: 15px;
+              
+}
+             
+.text-white{
+text-shadow: 3px 3px 5px black;
+padding-top: 100px;
+}
+        .btn{
+            box-shadow: 3px 5px white;
+        }
+          .jumbotron-extend{
+              height: 850px;
+              width: 100%;
+              background: url("/img/tripper.png");
+              background-size: cover;
+              }

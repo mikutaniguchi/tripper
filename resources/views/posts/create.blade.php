@@ -1,8 +1,6 @@
- <p class="ml-2 font-weight-bold">{{ $count_likes }}</p>
-
-⭐️prefecture
-$prefectures = [
-　 '' => '都道府県', 
+ <?php 
+    $prefectures = [
+        '' => '都道府県',
   '北海道' => '北海道', 
   '青森県' => '青森県', 
   '岩手県' => '岩手県', 
@@ -53,9 +51,11 @@ $prefectures = [
   ];
   
   $months = [
+  '' => '月', 
   '1月' => '1月', 
   '2月' => '2月', 
   '3月' => '3月', 
+  '4月' => '4月', 
   '5月' => '5月', 
   '6月' => '6月', 
   '7月' => '7月', 
@@ -67,6 +67,8 @@ $prefectures = [
     ];
     
   $categorys = [
+      
+  '' => 'カテゴリー', 
   '景色' => '景色', 
   'グルメ' => 'グルメ', 
   '宿泊' => '宿泊',
@@ -75,12 +77,21 @@ $prefectures = [
   '遊び' => '遊び', 
   '自然' => '自然', 
   ];
+?>
 
-{{ Form::select('FORM_NAME', $client_id_loop, null, ['class' => 'my_class']) }}
-↑これを使う
+ 
+ <div class="form-group">
+                 {!! Form::open(['route' => 'posts.store','files' => true]) !!}
+                             <!--{!! Form::label('file', '写真', ['class' => 'control-label']) !!}-->
+                             {!! Form::file('file') !!}
+                           {{ Form::select('month', $months, null, ['class' => 'hoge']) }}
+                           {{ Form::select('prefecture', $prefectures, null, ['class' => 'hoge']) }}
+                           {{ Form::select('category', $categorys, null, ['class' => 'hoge']) }}
+                           {!! Form::textarea('content', old('content'), ['class' => 'form-control mt-2', 'rows' => '2']) !!}
+                           {!! Form::submit('投稿', ['class' => 'btn btn-info btn-block mt-2']) !!}
+                {!! Form::close() !!}
+ </div>
+                
+                
 
 
-↓こうなる
-{{ Form::select('month', $months, null, ['class' => 'hoge']) }}
-{{ Form::select('prefecture', $prefectures, null, ['class' => 'hoge']) }}
-{{ Form::select('category', $categorys, null, ['class' => 'hoge']) }}

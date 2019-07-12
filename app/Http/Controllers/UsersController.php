@@ -68,19 +68,17 @@ class UsersController extends Controller
     
     public function likes($id)
     {
-        $user = User::find($id);
-        // そのユーザー内のlikeを１０個まで１ページに表示
-        $likes = $user->likes()->paginate(10);
+        $post = Post::find($id);
+        $posts = $post->like_users()->get();
         
         $data = [
-            // どのユーザーの
-            'user' => $user,
-            // postを取得するか
+            
+            'user' => $post,
             'posts' => $likes,
         ];
         
         $data += $this->counts($user);
 
-        return back($data);
+        return view('users.show', $data);
     }
 }

@@ -10,7 +10,7 @@ class LikesController extends Controller
     {
         \Auth::user()->like($id);
         
-        return back();
+         return back();
     }
 
     public function destroy($id)

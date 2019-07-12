@@ -7,8 +7,9 @@
                     <div>
                         {{ $user->name }}
                     </div>
-                    <div>
-                        <p>{!! link_to_route('users.show', 'プロフィールを見る', ['id' => $user->id]) !!}</p>
+                    <div class="d-flex">
+                        <p class="mr-5">{!! link_to_route('users.show', 'プロフィールを見る', ['id' => $user->id]) !!}</p>
+                         <p class="">@include('user_follow.follow_button', ['user' => $user])</p>
                     </div>
                 </div>
             </li>

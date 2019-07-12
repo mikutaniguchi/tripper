@@ -108,10 +108,10 @@ class User extends Authenticatable
      
     
         if ($exist) {
-            // 既にお気に入りに入れていれば何もしない
+            // 既にいいねしていれば何もしない
             return false;
         } else {
-            // 未登録であればお気に入り追加する
+            // いいねしてなければいいねする
             $this->likes()->attach($postId);
             return true;
         }
@@ -125,7 +125,7 @@ class User extends Authenticatable
        
     
         if ($exist) {
-            // 既にお気に入りにしていればフォローを外す
+            // 既にいいねしていればいいねを外す
             $this->likes()->detach($postId);
             return true;
         } else {

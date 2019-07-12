@@ -2,18 +2,13 @@
 
 @section('content')
     <div class="row">
-        <aside class="col-sm-4">
+        <aside class="col-sm-3">
             @include('users.card', ['user' => $user])
         </aside>
-        <div class="col-sm-8">
+        <div class="col-sm-9">
              @include('users.navtabs', ['user' => $user])
             @if (Auth::id() == $user->id)
-                {!! Form::open(['route' => 'posts.store']) !!}
-                    <div class="form-group">
-                        {!! Form::textarea('content', old('content'), ['class' => 'form-control', 'rows' => '2']) !!}
-                        {!! Form::submit('投稿', ['class' => 'btn btn-info btn-block']) !!}
-                    </div>
-                {!! Form::close() !!}
+                @include('posts.create', ['posts' => $posts])
             @endif
             @if (count($posts) > 0)
                 @include('posts.posts', ['posts' => $posts])
