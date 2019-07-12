@@ -16,6 +16,7 @@ class PostsController extends Controller
             $user = \Auth::user();
             $posts = $user->feed_posts()->orderBy('created_at', 'desc')->paginate(10);
             
+            
             $data = [
                 'user' => $user,
                 'posts' => $posts,

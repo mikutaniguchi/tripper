@@ -16,7 +16,8 @@
                  <div class="d-flex mt-2">
                       <p class="mr-1">行きたい！</p>
                       <p>@include('likes.likes_button', ['posts' => $posts])</p>
-                     
+                      
+                       <p class="ml-2 font-weight-bold">{{ $post->like_users()->count() }}</p>
                 </div>
                     <p class="mb-2">{!! nl2br(e($post->content)) !!}</p>
                 </div>

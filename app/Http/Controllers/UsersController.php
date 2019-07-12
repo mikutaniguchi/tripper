@@ -68,16 +68,19 @@ class UsersController extends Controller
     
     public function likes($id)
     {
+        // postモデルから$idのidをもつレコードを1件取得する
         $post = Post::find($id);
+        // そのポストidはlikeしてきたユーザーの数を取得する
         $posts = $post->like_users()->get();
         
         $data = [
-            
-            'user' => $post,
-            'posts' => $likes,
+            // どのpostの
+            'post' => $post,
+            // ユーザー数を取得するか
+            'like_users' => $likes,
         ];
-        
-        $data += $this->counts($user);
+        // postsの数をカウントする
+        $data += $this->counts($posts);
 
         return view('users.show', $data);
     }

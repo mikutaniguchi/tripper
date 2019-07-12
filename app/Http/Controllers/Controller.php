@@ -16,7 +16,7 @@ class Controller extends BaseController
         $count_posts = $user->posts()->count();
         $count_followings = $user->followings()->count();
         $count_followers = $user->followers()->count();
-        $count_likes = $user->likes()->count();
+        //$count_likes = $post->like_users()->count();
     
     
     
@@ -24,7 +24,7 @@ class Controller extends BaseController
             'count_posts' => $count_posts,
             'count_followings' => $count_followings,
             'count_followers' => $count_followers,
-            'count_likes' => $count_likes,
+            //'count_likes' => $count_likes,
             
         ];
     }
