@@ -28,6 +28,8 @@ Route::post('login', 'Auth\LoginController@login')->name('login.post');
 // ログアウト処理
 Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 
+Route::get('search', 'UsersController@search')->name('users.search'); 
+
 Route::group(['middleware' => ['auth']], function () {
     // indexとshowの画面でのみログイン認証が必要
     Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
@@ -39,7 +41,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('followers', 'UsersController@followers')->name('users.followers');
         Route::get('likes', 'UsersController@likes')->name('users.likes');    
     });
-    
+     
     
      Route::group(['prefix' => 'posts/{id}'], function () {
         Route::post('like', 'LikesController@store')->name('likes.like');

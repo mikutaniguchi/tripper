@@ -38,9 +38,19 @@ class PostsController extends Controller
             'month' => 'required|max:191',
             'prefecture' => 'required|max:191',
             'category' => 'required|max:191',
-            'content' => 'max:191',
-            
-        ]);
+            'content' => 'required|max:191',
+        ],
+        
+        [
+             'file.required' => '写真は必須です',
+             'month.required'  => '月は必須です',
+             'prefecture.required'  => '都道府県は必須です',
+             'category.required'  => 'カテゴリーは必須です',
+             'content.required'  => 'コメントは必須です',
+         ]
+        
+        );
+        
         
        
         if ($request->file('file')->isValid([])) {
@@ -105,7 +115,5 @@ class PostsController extends Controller
 
         return back();
     }
-    
-    
     
 }

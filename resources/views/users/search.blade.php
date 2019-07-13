@@ -78,19 +78,25 @@
   '自然' => '自然', 
   ];
 ?>
- 
- <div class="form-group">
-                 {!! Form::open(['route' => 'posts.store','files' => true]) !!}
-                             <!--{!! Form::label('file', '写真', ['class' => 'control-label']) !!}-->
-                           {!! Form::file('file') !!}
-                           {{ Form::select('month', $months, null, ['class' => 'hoge']) }}
-                           {{ Form::select('prefecture', $prefectures, null, ['class' => 'hoge']) }}
-                           {{ Form::select('category', $categorys, null, ['class' => 'hoge']) }}
-                           {!! Form::textarea('content', old('content'), ['class' => 'form-control mt-2', 'rows' => '2','placeholder'=>'コメント入力']) !!}
-                           {!! Form::submit('投稿', ['class' => 'btn btn-info btn-block mt-2']) !!}
-                {!! Form::close() !!}
- </div>
-                
-                
 
 
+@extends('layouts.app')
+
+@section('content')
+ 　　　　{!! Form::open(['route' => 'users.search','method' => 'GET']) !!}
+       <div class="row">
+      　  <div class="col-sm-1">
+       　 </div>
+       　<div class="col-sm-9">
+           <div class="search border border-secondary rounded p-4 text-center bg-gradient-light">
+               {!! Form::label('search', 'いずれかを検索する', ['class' => 'control-label']) !!}
+               {{ Form::select('month', $months, null, ['class' => 'hoge']) }}
+               {{ Form::select('prefecture', $prefectures, null, ['class' => 'hoge']) }}
+               {{ Form::select('category', $categorys, null, ['class' => 'hoge']) }}
+               {!! Form::submit('検索開始', ['class' => 'btn btn-outline-secondary btn-lg mt-4 btn-block']) !!}
+           </div>
+         {!! Form::close() !!}
+            @include('posts.posts', ['posts' => $posts])
+        </div>
+    </div>
+@endsection

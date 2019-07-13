@@ -84,4 +84,29 @@ class UsersController extends Controller
 
         return view('users.show', $data);
     }
+    
+    
+    public function search(Request $request)
+    {
+
+     $query = Post::query();
+      
+     if(!empty($request->month)) {
+     $query->where('month', $request->month);
+     }
+     if(!empty($request->prefecture)) {
+     $query->where('prefecture', $request->prefecture);
+     }
+     if(!empty($request->category)) {
+     $query->where('category', $request->category);
+     }
+
+      $posts = $query->orderBy('created_at', 'desc')->paginate(10);
+      
+
+           return view('users.search', [
+            'posts' => $posts,
+        ]);
+    
+    }
 }
