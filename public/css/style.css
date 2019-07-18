@@ -20,7 +20,8 @@
 
  h1{
 letter-spacing: 15px;
- }       
+ }     
+ 
 
 
 @media (max-width: 670px) {
@@ -33,9 +34,8 @@ letter-spacing: 15px;
 text-shadow: 3px 3px 5px black;
 padding-top: 100px;
 }
-
- .btn{
-box-shadow: 3px 5px white;
+.start-btn{
+    box-shadow:1px 1px 1px 1px white;
 }
 
 .jumbotron-extend{

@@ -22,7 +22,7 @@
       <div class="jumbotron jumbotron-extend">
             <div class="text-center mt-5">
                 <h1 class="display-4 mb-5 font-weight-light text-white">旅の感動を共有しよう</h1>
-                {!! link_to_route('signup.get', 'Tripperを始める', [], ['class' => 'btn btn-lg btn-info']) !!}
+                {!! link_to_route('signup.get', 'Tripperを始める', [], ['class' => 'btn btn-lg btn-info start-btn']) !!}
             </div>
         </div>
     @endif

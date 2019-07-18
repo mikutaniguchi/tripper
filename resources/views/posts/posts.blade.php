@@ -1,7 +1,7 @@
 <ul class="list-unstyled">
     @foreach ($posts as $post)
-        <li class="mb-4 border-bottom p-2">
-            <div class="mb-2">
+        <li class="border-bottom p-1">
+            <div class="mb-1 mt-2">
             <img class="mr-2 rounded-circle" src="{{ Gravatar::src($post->user->email, 50) }}" alt="">
             {!! link_to_route('users.show', $post->user->name, ['id' => $post->user->id]) !!} <span class="text-muted">posted at {{ $post->created_at }}</span>
             </div>
@@ -19,15 +19,21 @@
                       
                        <p class="ml-2 font-weight-bold">{{ $post->like_users()->count() }}</p>
                 </div>
-                    <p class="mb-2">{!! nl2br(e($post->content)) !!}</p>
+             
+                    <p>{!! nl2br(e($post->content)) !!}</p>
+                    
                 </div>
-               
-                 
-                 <div>
+                 <div class="d-flex justify-content-end mb-2">
                     @if (Auth::id() == $post->user_id)
+                     <p> {!! Form::open(['route' => ['posts.edit', $post->id], 'method' => 'GET']) !!}
+                            {!! Form::submit('編集する', ['class' => 'btn btn-light btn-sm mr-4']) !!}
+                         {!! Form::close() !!}
+                     </p>
+                     <p>
                         {!! Form::open(['route' => ['posts.destroy', $post->id], 'method' => 'delete']) !!}
-                            {!! Form::submit('削除', ['class' => 'btn btn-outline-dark btn-sm btn1 mb-1']) !!}
+                            {!! Form::submit('削除', ['class' => 'btn btn-outline-dark btn-sm']) !!}
                         {!! Form::close() !!}
+                    </p>
                     @endif
                 </div>
         </li>

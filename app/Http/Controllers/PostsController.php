@@ -102,8 +102,46 @@ class PostsController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+     //編集ページ
+    public function edit($id)
+    {
+        //Taskモデルから$idのidをもつレコードを1件取得する
+        $post = Post::find($id);
+         
+        if (\Auth::id() === $post->user_id) {
+        // edit.blade.phpの内容表示
+        return view('posts.edit', [
+            'post' => $post,
+        ]);
+        }
+        return redirect('/');
+    }
     
+    public function update(Request $request, $id)
+    {
+        //何かしらの制限します
+        $this->validate($request, [
     
+            // タスクの制限（空欄だめ、文字以内）
+            'month' => 'required|max:191',
+            'prefecture' => 'required|max:191',
+            'category' => 'required|max:191',
+            'content' => 'required|max:191',
+            
+        ]);
+        //Postモデルから$idのidをもつレコードを1件取得する
+        $post = Post::find($id);
+     
+        //入力されたタスクを取得
+        $post->month = $request->month;
+        $post->prefecture = $request->prefecture;
+        $post->category = $request->category;
+        $post->content = $request->content;
+        // 保存
+        $post->save();
+        ////top画面に戻る
+        return redirect('/');
+    }
     
         public function destroy($id)
     {
