@@ -34,7 +34,7 @@ class PostsController extends Controller
         $post = new Post;
         $this->validate($request, [
             
-            'file' => 'required|file|image|mimes:jpg,jpeg,png|max:10240',
+            'file' => 'required|file|image|mimes:jpg,jpeg,png',
             'month' => 'required|max:191',
             'prefecture' => 'required|max:191',
             'category' => 'required|max:191',
@@ -43,6 +43,8 @@ class PostsController extends Controller
         
         [
              'file.required' => '写真は必須です',
+             'file.file' => '写真は必須です',
+             
              'month.required'  => '月は必須です',
              'prefecture.required'  => '都道府県は必須です',
              'category.required'  => 'カテゴリーは必須です',
