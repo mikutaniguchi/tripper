@@ -43,8 +43,6 @@ class PostsController extends Controller
         
         [
              'file.required' => '写真は必須です',
-             'file.file' => '写真は必須です',
-             
              'month.required'  => '月は必須です',
              'prefecture.required'  => '都道府県は必須です',
              'category.required'  => 'カテゴリーは必須です',
